@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Full Regression Suite"
+       parallel="tests"
+       thread-count="6">
+
+    <listeners>
+        <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+    </listeners>
+
+    <test name="Contact Us Tests">
+        <classes>
+            <class name="Tests.ContactUsTest"/>
+        </classes>
+    </test>
+
+    <test name="Login Tests">
+        <classes>
+            <class name="Tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="ToDoList Tests">
+        <classes>
+            <class name="Tests.ToDoListTest"/>
+        </classes>
+    </test>
+
+    <test name="Dropdown Checkbox Radio Tests">
+        <classes>
+            <class name="Tests.DropdownCheckboxRadioTest"/>
+        </classes>
+    </test>
+
+    <test name="Actions Tests">
+        <classes>
+            <class name="Tests.ActionsTest"/>
+        </classes>
+    </test>
+
+    <test name="Report Failure Test">
+        <classes>
+            <class name="Tests.ReportFailureTest"/>
+        </classes>
+    </test>
+
+</suite>
