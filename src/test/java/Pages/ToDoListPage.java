@@ -31,68 +31,85 @@ public class ToDoListPage extends CommonPage {
         addNewTodoField.sendKeys(data.getTaskName());
         addNewTodoField.sendKeys(Keys.ENTER);
 
-        LoggerUtility.infoTestCase(
-                "New todo was added: " + data.getTaskName()
-        );
+        LoggerUtility.infoTestCase("New todo was added: " + data.getTaskName());
     }
 
     public boolean isTodoDisplayed(String taskName) {
 
-        return todoItems.stream().anyMatch(item -> item.getText().trim().equals(taskName));
+        return findTodoByName(taskName) != null;
     }
+
     public void markTodoAsCompleted(String taskName) {
 
-        for (WebElement item : todoItems) {
+        WebElement todoItem = findTodoByName(taskName);
 
-            if (item.getText().trim().equals(taskName)) {
+        if (todoItem != null) {
 
-                elementsMethods.clickOnElement(item);
+            elementsMethods.clickOnElement(todoItem);
 
-                LoggerUtility.infoTestCase("Todo marked as completed: " + taskName);
-
-                break;
-            }
+            LoggerUtility.infoTestCase("Todo marked as completed: " + taskName);
         }
     }
+
     public boolean isTodoCompleted(String taskName) {
 
-        for (WebElement item : todoItems) {
+        WebElement todoItem = findTodoByName(taskName);
 
-            if (item.getText().trim().equals(taskName)) {
-
-                String classAttribute = item.getAttribute("class");
-
-                return classAttribute != null && classAttribute.contains("completed");
-            }
+        if (todoItem == null) {
+            return false;
         }
-        return false;
+
+        String classAttribute = todoItem.getAttribute("class");
+
+        return classAttribute != null && classAttribute.contains("completed");
     }
 
     public boolean isTodoPresent(String taskName) {
 
-        return todoItems.stream().anyMatch(item -> item.getText().trim().equals(taskName));
+        return findTodoByName(taskName) != null;
     }
+
     public void deleteTodo(String taskName) {
+
+        WebElement todoItem = findTodoByName(taskName);
+
+        if (todoItem == null) {
+            return;
+        }
+
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        Actions actions = new Actions(driver);
+
+        actions.moveToElement(todoItem).pause(Duration.ofMillis(500)).perform();
+
+        WebElement deleteButton = wait.until(driver -> {
+
+            WebElement button = todoItem.findElement(By.xpath(".//span/i[contains(@class,'fa-trash')]"));
+
+            if (button.isDisplayed() && button.isEnabled()) {
+                return button;
+            }
+            return null;
+        });
+
+        deleteButton.click();
+
+        wait.until(ExpectedConditions.stalenessOf(todoItem));
+
+        LoggerUtility.infoTestCase("Todo was deleted: " + taskName);
+    }
+
+    private WebElement findTodoByName(String taskName) {
 
         for (WebElement item : todoItems) {
 
             if (item.getText().trim().equals(taskName)) {
-
-                Actions actions = new Actions(driver);
-                actions.moveToElement(item).perform();
-
-                WebElement deleteButton = item.findElement(By.xpath(".//span/i[contains(@class,'fa-trash')]"));
-
-                elementsMethods.clickOnElement(deleteButton);
-
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-                wait.until(ExpectedConditions.stalenessOf(item));
-
-                LoggerUtility.infoTestCase("Todo was deleted: " + taskName);
-
-                break;
+                return item;
             }
         }
+
+        return null;
     }
 }
