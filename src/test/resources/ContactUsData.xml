@@ -1,0 +1,20 @@
+<dataSets>
+    <dataSet1>
+        <firstName>Ionel</firstName>
+        <lastName>Stefan</lastName>
+        <email>test@test.com</email>
+        <message>TestMessage</message>
+    </dataSet1>
+
+
+<dataSet2>
+    <firstName>Florina</firstName>
+    <lastName>Matei</lastName>
+    <email>MyEmail</email>
+    <message>Hello all</message>
+</dataSet2>
+</dataSets>
+
+
+
+

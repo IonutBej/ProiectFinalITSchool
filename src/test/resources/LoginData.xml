@@ -1,0 +1,10 @@
+<dataSets>
+    <dataSet1>
+        <username>webdriver</username>
+        <password>webdriver123</password>
+    </dataSet1>
+    <dataSet2>
+        <username>Ionut</username>
+        <password>Test123!</password>
+    </dataSet2>
+</dataSets>
