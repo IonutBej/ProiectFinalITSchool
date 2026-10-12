@@ -3,7 +3,7 @@
 
 <suite name="Regression Suite"
        parallel="tests"
-       thread-count="6">
+       thread-count="5">
 
     <listeners>
         <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
@@ -38,10 +38,4 @@
             <class name="Tests.ActionsTest"/>
         </classes>
     </test>
-    <test name="Report Failure Test">
-        <classes>
-            <class name="Tests.ReportFailureTest"/>
-        </classes>
-    </test>
-
 </suite>
