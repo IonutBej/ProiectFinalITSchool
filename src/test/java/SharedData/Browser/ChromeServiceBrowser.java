@@ -24,6 +24,8 @@ public class ChromeServiceBrowser implements iBrowserService {
 
         if (ciCd) {
             options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--disable-dev-shm-usage");
         }
         return options;
     }

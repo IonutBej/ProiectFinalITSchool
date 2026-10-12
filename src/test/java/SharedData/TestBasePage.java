@@ -22,6 +22,9 @@ public class TestBasePage {
         LoggerUtility.startTestCase(testName);
         driver = new BrowserFactory().getBrowserFactory();
         driver.get("https://webdriveruniversity.com/");
+        System.out.println("CURRENT URL: " + driver.getCurrentUrl());
+        System.out.println("PAGE TITLE: " + driver.getTitle());
+        System.out.println("PAGE SOURCE: " + driver.getPageSource());
         LoggerUtility.infoTestCase("===== The browser started successfully");
     }
 
