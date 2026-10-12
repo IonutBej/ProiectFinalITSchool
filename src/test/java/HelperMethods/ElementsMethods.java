@@ -44,7 +44,18 @@ public class ElementsMethods {
         element.sendKeys(text);
 
     }
+    public void enterText(WebElement element, String text, boolean clearBeforeTyping) {
+        waitVisibility(element);
+
+        if (clearBeforeTyping) {
+            element.clear();
+            element.sendKeys(text);
+        } else {
+            element.sendKeys(text);
+        }
+    }
 }
+
 
 
 
